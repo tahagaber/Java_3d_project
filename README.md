@@ -1,36 +1,51 @@
-# Java Dashboard Light and Dark mode
-This dashboard build by using java swing with flatlaf look and feel
+🖥️ مشروع Dashboard بالجافا (Java Swing + FlatLaf)
 
-### Library use
-- flatlaf-3.2.jar
-- flatlaf-extras-3.2.jar
-- jsvg-1.2.0.jar
-- flatlaf-fonts-roboto-2.137.jar
-- swing-toast-notifications-1.0.1.jar
+المشروع ده معمول باستخدام Java Swing، والـ FlatLaf اللي هو شكل جاهز (Look and Feel) بيخلي شكل البرنامج شيك وحديث، زي التطبيقات الجديدة اللي فيها Light/Dark mode.
 
-### Sample code to show form
-``` java
-//  Application class from package raven.application
-//  Parameter as java.awt.Component
+📚 المكتبات (Libraries) المستخدمة
 
+في شوية مكتبات لازم تضيفها علشان المشروع يشتغل:
+
+flatlaf-3.2.jar → الأساس بتاع الـ FlatLaf (الستايل العام)
+
+flatlaf-extras-3.2.jar → فيها شوية إضافات وأدوات خاصة بالـ FlatLaf
+
+jsvg-1.2.0.jar → علشان تقدر تستخدم صور SVG (أيقونات بجودة عالية)
+
+flatlaf-fonts-roboto-2.137.jar → خط Roboto اللي بيستخدمه الواجهة
+
+swing-toast-notifications-1.0.1.jar → علشان تعمل إشعارات (Toast) زي اللي بتطلع في الموبايل
+
+🧩 إزاي تشغّل الفورم (Form)
+// الكلاس ده موجود في الباكدج raven.application
+// بياخد كـ parameter مكون (Component)
 Application.showForm(new PanelForm());
 
-//  Set menu selection by index and subIndex
-
+// لو عايز تحدد المينيو اللي يبقى متعلم عليه
 Application.setSelectedMenu(0, 0);
-```
-### Menu Items
-``` java
-//  Modify this code in raven.menu.Menu.java
+
+
+يعني ببساطة كده، السطر الأول بيعرض الفورم اللي انت عايزه (زي الصفحة أو الشاشة).
+والسطر التاني بيخلي المينيو يختار عنصر معين بالـ index بتاعه.
+
+📋 المينيو (Menu Items)
+
+الكود ده بيتحط في raven.menu.Menu.java
 
 private final String menuItems[][] = {
-    {"~MAIN~"}, //  Menu title
-    {"Dashboard"},
-    {"Email", "Inbox", "Read", "Compost"},
+    {"~MAIN~"}, // ده عنوان المينيو
+    {"Dashboard"}, // أول اختيار
+    {"Email", "Inbox", "Read", "Compost"}, // مينيو فرعي فيه 3 اختيارات
 };
-```
-### Menu Event
-``` java
+
+
+✅ خُد بالك:
+لو حطيت اسم العنوان بين ~ زي كده ~MAIN~ يبقى ده عنوان للمجموعة مش زرار بيتضغط عليه.
+
+⚙️ أحداث المينيو (Menu Events)
+
+الكود ده بيحدد إيه اللي يحصل لما المستخدم يضغط على عنصر من المينيو:
+
 menu.addMenuEvent(new MenuEvent() {
     @Override
     public void menuSelected(int index, int subIndex, MenuAction action) {
@@ -45,26 +60,48 @@ menu.addMenuEvent(new MenuEvent() {
         }
     }
 });
-```
 
-### More custom you can apply flatlaf style properties
 
-- [Flatlaf github](https://github.com/JFormDesigner/FlatLaf)
-- [Flatlaf doc](https://www.formdev.com/flatlaf/customizing/)
-### Screenshot
-<img src="https://github.com/DJ-Raven/flatlaf-dashboard/assets/58245926/23ab0477-c11e-498d-92f9-37f6bfa944f6" alt="sample 1" width="350"/>
-<img src="https://github.com/DJ-Raven/flatlaf-dashboard/assets/58245926/44d1972b-b29b-4a11-8fdd-be7f27782e5b" alt="sample 1" width="350"/>
-</br>
-<img src="https://github.com/DJ-Raven/flatlaf-dashboard/assets/58245926/71c03d69-4508-43ea-86e6-2cba0c8e1dc8" alt="sample 1" width="350"/>
-<img src="https://github.com/DJ-Raven/flatlaf-dashboard/assets/58245926/fe793459-33b8-47e7-be06-385c3e4dfa37" alt="sample 1" width="350"/>
+📌 التوضيح:
 
-### Update Note
-- [27-05-2023] Add menu item title use `~` sign around your title name : `{"~YOUR TITLE NAME~"}`
-- [28-05-2023] Update auto scale component and change `Application.mainForm.showForm()` to `Application.showForm()`
-- [29-05-2023] Update popup submenu item removed border and add drop shadow border
-- [31-05-2023] Update add login form
-- [31-05-2023] Update selection menu background and add method selected menu by index and subIndex
-- [17-06-2023] Update add [Toast Notifications](https://github.com/DJ-Raven/swing-toast-notifications.git)
-- [27-06-2023] Update add menu font properties for menu item and menu label `Menu.item.font` and `Menu.label.font`
-- [27-06-2023] Update menu support right to left by enable this [code](https://github.com/DJ-Raven/flatlaf-dashboard/blob/70d08d66fa48f72e55ae873cbc2968e4ac151b57/src/raven/application/Application.java#L87C13-L87C13)
-- [03-10-2023] Update add properties `AccentControl.show` to show and hide accent color toolbar
+index هو ترتيب المينيو الرئيسي (زي Dashboard أو Email).
+
+subIndex هو ترتيب العنصر اللي جواه (زي Inbox، Read...).
+
+Application.showForm(...) بيعرض الصفحة اللي انت عايزها.
+
+action.cancel() بتمنع أي أكشن لو مش عايز تعمل حاجة.
+
+🎨 تخصيص الشكل (Customization)
+
+لو حبيت تغير في شكل الواجهة (ألوان – خطوط – حجم – أنيميشن... إلخ)
+تقدر تستخدم خصائص الـ FlatLaf من هنا:
+
+صفحة GitHub
+
+الـ Documentation الرسمي
+
+📸 صور من الداشبورد
+
+في المشروع فيه صور بتوضح الشكل في Light و Dark mode
+زي كده 👇
+(في اللينكات الأصلية صور واجهة جميلة جدًا للـ Dashboard)
+
+🆕 تحديثات المشروع (Update Notes)
+
+📅 آخر التحديثات اللي حصلت:
+
+التاريخ	التحديث
+27-05-2023	إضافة خاصية العناوين في المينيو (~TITLE~)
+28-05-2023	تحسين طريقة عرض الفورم
+29-05-2023	تعديل المينيو البوب أب (Popup) وشكله
+31-05-2023	إضافة شاشة تسجيل الدخول
+17-06-2023	إضافة إشعارات Toast Notifications
+27-06-2023	دعم الخطوط المخصصة في المينيو
+27-06-2023	دعم الـ Right-To-Left (زي اللغة العربية)
+03-10-2023	إضافة خاصية AccentControl.show لإظهار/إخفاء شريط الألوان
+💡 الخلاصة
+
+المشروع ده معمول علشان يعمل Dashboard احترافية بجافا Swing،
+ويكون ليها Light/Dark mode، ومينيو متحرك، وفورمات سهلة في الاستخدام.
+كله مبني على FlatLaf اللي بيخلي شكل البرنامج عصري جدًا من غير ما تتعب نفسك في التصميم.
