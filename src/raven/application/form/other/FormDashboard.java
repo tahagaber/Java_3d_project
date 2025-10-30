@@ -1,228 +1,145 @@
 package raven.application.form.other;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
+
+import javax.swing.*;
 import com.formdev.flatlaf.FlatClientProperties;
-import raven.toast.Notifications;
-import Widget.Card;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.BorderFactory;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FlowLayout;
 import java.awt.*;
-import Widget.Table;
-import javax.swing.JScrollPane;
-import javax.swing.Timer;
-import javax.swing.ImageIcon;
-import javax.swing.JScrollBar;
-import java.util.ArrayList;
-import javax.swing.BoxLayout;
-
-
-/**
- *
- * @author Raven
- */
+import Widget.Profile;
+import raven.application.widget.SearchBar;
+import Widget.ReadingDemographicPanel;
+import Widget.PopularAuthorWidget;
 
 public class FormDashboard extends JPanel {
 
-    private JScrollPane scroll; // للـ cardStrip المتحرك
-    private JPanel cardStrip;   // الحاوية للكروت المتحركة
+    // إعدادات Padding
+    private static final Insets TOP_PANEL_PADDING = new Insets(20, 30, 0, 30);
+    private static final Insets BOTTOM_PANEL_PADDING = new Insets(10, 30, 30, 30);
+
+    // 💡 الأحجام المخصصة للتحكم في الحجم الأولي للودجت
+    private static final Dimension SEARCH_SIZE = new Dimension(380, 40);
+    private static final Dimension PROFILE_SIZE = new Dimension(220, 38);
+    private static final Dimension READING_WIDGET_SIZE = new Dimension(720, 300); // العرض الذي تريده للودجت اليسرى
+    private static final Dimension AUTHOR_WIDGET_SIZE = new Dimension(400, 300); // العرض الذي تريده للودجت اليمنى
+
+    // قيمة البادنج الإضافية للدفع للأسفل
+    private static final int EXTRA_VERTICAL_SPACE = 100;
+    private static final int READING_WIDGET_TOP_SHIFT = 110;
+    private static final int HORIZONTAL_WIDGET_GAP = 20;
+
+    private JLabel lb;
 
     public FormDashboard() {
         initComponents();
-        lb.putClientProperty(FlatClientProperties.STYLE, "font:$h1.font");
 
-        // ===== الكروت الرئيسية =====
-        Card card1 = new Card();
-        card1.setPreferredSize(new Dimension(250, 120));
-        card1.setTitle("Students");
-        card1.setValue("1,250");
-        card1.setPercentage("+12%");
-        card1.setGradient(new Color(33, 150, 243), new Color(156, 39, 176));
+        setLayout(new BorderLayout(0, 10));
+        setOpaque(false);
 
-        Card card2 = new Card();
-        card2.setPreferredSize(new Dimension(250, 120));
-        card2.setTitle("Courses");
-        card2.setValue("56");
-        card2.setPercentage("+5%");
-        card2.setGradient(new Color(255, 87, 34), new Color(255, 193, 7));
+        add(createTopPanel(), BorderLayout.NORTH);
 
-        Card card3 = new Card();
-        card3.setPreferredSize(new Dimension(250, 120));
-        card3.setTitle("Revenue");
-        card3.setValue("$12,540");
-        card3.setPercentage("+8%");
-        card3.setGradient(new Color(76, 175, 80), new Color(139, 195, 74));
+        JPanel centerSpacer = new JPanel(new BorderLayout());
+        centerSpacer.setOpaque(false);
+        centerSpacer.setBorder(BorderFactory.createEmptyBorder(EXTRA_VERTICAL_SPACE, 0, 0, 0));
+        centerSpacer.add(Box.createVerticalGlue(), BorderLayout.CENTER);
 
-        Card card4 = new Card();
-        card4.setPreferredSize(new Dimension(250, 120));
-        card4.setTitle("Staff");
-        card4.setValue("24");
-        card4.setPercentage("+3%");
-        card4.setGradient(new Color(63, 81, 181), new Color(103, 58, 183));
-
-        JPanel panelCards = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        panelCards.setOpaque(false);
-        panelCards.add(card1);
-        panelCards.add(card2);
-        panelCards.add(card3);
-        panelCards.add(card4);
-        panelCards.setPreferredSize(new Dimension(1000, 150));
-
-// ===== الجدول وتفاصيل الطلاب (تصغير لأسفل) =====
-        Table table1 = new Table();
-        JScrollPane scrollTable = new JScrollPane(table1);
-// قلل ارتفاع الجدول
-        scrollTable.setPreferredSize(new Dimension(600, 150)); // بدل 180 أو 200
-        scrollTable.setBorder(BorderFactory.createTitledBorder("Students List"));
-
-        JTextArea detailsArea = new JTextArea(8, 25); // قلل عدد الأسطر
-        detailsArea.setEditable(false);
-        detailsArea.setFont(new Font("Consolas", Font.PLAIN, 14));
-        JScrollPane scrollDetails = new JScrollPane(detailsArea);
-        scrollDetails.setPreferredSize(new Dimension(300, 150)); // قلل ارتفاع الـ JTextArea
-        scrollDetails.setBorder(BorderFactory.createTitledBorder("Student Details"));
-
-// Panel الجدول والنص
-        JPanel panelTableAndDetails = new JPanel(new BorderLayout(10, 8));
-        panelTableAndDetails.setOpaque(false);
-        panelTableAndDetails.add(scrollTable, BorderLayout.CENTER);
-        panelTableAndDetails.add(scrollDetails, BorderLayout.EAST);
-// قلل ارتفاع الحاوية الكلي حتى ينزل للأسفل
-        panelTableAndDetails.setPreferredSize(new Dimension(1000, 180));
-
-        // ===== الكروت المتحركة =====
-        cardStrip = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
-        cardStrip.setOpaque(false);
-
-        ArrayList<JLabel> labels = new ArrayList<>();
-        for (int i = 1; i <= 8; i++) {
-            JLabel card = new JLabel("Member " + i, SwingConstants.CENTER);
-            card.setPreferredSize(new Dimension(120, 120));
-            card.setOpaque(true);
-            card.setBackground(new Color(100 + i * 15, 150, 200 - i * 10));
-            card.setForeground(Color.WHITE);
-            card.setFont(new Font("Segoe UI", Font.BOLD, 14));
-            card.setBorder(BorderFactory.createLineBorder(new Color(180, 180, 180), 2, true));
-            cardStrip.add(card);
-            labels.add(card);
-        }
-
-        // نسخة ثانية لإنشاء تأثير الحلقة
-        for (JLabel lbl : labels) {
-            JLabel clone = new JLabel(lbl.getText(), SwingConstants.CENTER);
-            clone.setPreferredSize(lbl.getPreferredSize());
-            clone.setOpaque(true);
-            clone.setBackground(lbl.getBackground());
-            clone.setForeground(lbl.getForeground());
-            clone.setFont(lbl.getFont());
-            clone.setBorder(lbl.getBorder());
-            cardStrip.add(clone);
-        }
-
-        scroll = new JScrollPane(cardStrip);
-        scroll.setPreferredSize(new Dimension(1000, 250));
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scroll.setBorder(BorderFactory.createTitledBorder("Team Members"));
-
-        javax.swing.Timer moveTimer = new javax.swing.Timer(30, e -> {
-            JScrollBar hBar = scroll.getHorizontalScrollBar();
-            int newValue = hBar.getValue() + 2;
-            if (newValue >= hBar.getMaximum() / 2) {
-                hBar.setValue(newValue - hBar.getMaximum() / 2);
-            } else {
-                hBar.setValue(newValue);
-            }
-        });
-        moveTimer.start();
-
-        // ===== Panel رئيسي مع ترتيب عمودي =====
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setOpaque(false);
-
-        // الترتيب الجديد: كروت رئيسية → كروت متحركة → الجدول + نص
-        panelCards.setAlignmentX(Component.CENTER_ALIGNMENT);
-        scroll.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panelTableAndDetails.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        mainPanel.add(panelCards);
-        mainPanel.add(scroll);
-        mainPanel.add(panelTableAndDetails);
-
-        // ===== بيانات الجدول =====
-        javax.swing.table.DefaultTableModel model = new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                        {1, "Tasnim", "Software", 3.8, "Active"},
-                        {2, "Taha", "Software", 3.8, "Active"},
-                        {3, "Nourin", "Software", 3.8, "Active"},
-                        {4, "Ibrahim", "Software", 3.8, "Active"},
-                        {5, "Menna", "Software", 3.8, "Active"},
-                },
-                new String[]{"ID", "Name", "Department", "GPA", "Status"}
-        );
-        table1.setModel(model);
-
-        table1.getSelectionModel().addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                int row = table1.getSelectedRow();
-                if (row != -1) {
-                    Object id = table1.getValueAt(row, 0);
-                    Object name = table1.getValueAt(row, 1);
-                    Object dept = table1.getValueAt(row, 2);
-
-                    detailsArea.setText("🧑‍🎓 Student Details\n"
-                            + "--------------------------\n"
-                            + "ID: " + id + "\n"
-                            + "Name: " + name + "\n"
-                            + "Department: " + dept + "\n"
-                            + "GPA: 3.8\n"
-                            + "Status: Active\n");
-                }
-            }
-        });
-
-        // ===== إضافة mainPanel للواجهة =====
-        setLayout(new BorderLayout());
-        add(lb, BorderLayout.NORTH);
-        add(mainPanel, BorderLayout.CENTER);
+        add(centerSpacer, BorderLayout.CENTER);
+        add(createBottomPanel(), BorderLayout.SOUTH);
     }
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+
+    private JPanel createTopPanel() {
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setOpaque(false);
+        topPanel.setBorder(BorderFactory.createEmptyBorder(
+                TOP_PANEL_PADDING.top,
+                TOP_PANEL_PADDING.left,
+                TOP_PANEL_PADDING.bottom,
+                TOP_PANEL_PADDING.right
+        ));
+
+        // Search bar
+        JPanel searchWrapper = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        searchWrapper.setOpaque(false);
+
+        SearchBar searchBar = new SearchBar("Search eBooks by title, author, or keyword");
+        searchBar.setPreferredSize(SEARCH_SIZE);
+        searchBar.setEndIcon("/raven/icon/png/more-horizontal-rectangle-svgrepo-com.png", 20, 20);
+        searchBar.showEndIcon(true);
+        searchWrapper.add(searchBar);
+        topPanel.add(searchWrapper, BorderLayout.WEST);
+
+        // Profile
+        Profile profileWidget = new Profile();
+        profileWidget.setPreferredSize(PROFILE_SIZE);
+        profileWidget.setBorderColor(new Color(255, 255, 255, 120));
+        profileWidget.setCornerRadius(15);
+
+        JPanel profileWrapper = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+        profileWrapper.setOpaque(false);
+        profileWrapper.add(profileWidget);
+
+        topPanel.add(profileWrapper, BorderLayout.EAST);
+
+        return topPanel;
+    }
+
+    private JPanel createBottomPanel() {
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.setOpaque(false);
+        bottomPanel.setBorder(BorderFactory.createEmptyBorder(
+                BOTTOM_PANEL_PADDING.top,
+                BOTTOM_PANEL_PADDING.left,
+                BOTTOM_PANEL_PADDING.bottom,
+                BOTTOM_PANEL_PADDING.right
+        ));
+
+        // العنوان
+
+        // حاوية الـ Widgets (GridBagLayout)
+        JPanel contentWrapper = new JPanel(new GridBagLayout());
+        contentWrapper.setOpaque(false);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.weighty = 0.0;
+
+        // 1. ReadingDemographicPanel (الودجت اليسرى)
+        ReadingDemographicPanel readingPanel = new ReadingDemographicPanel();
+
+        // 💡 نستخدم setPreferredSize لتحديد الحجم الأولي (720x300)
+        readingPanel.setPreferredSize(READING_WIDGET_SIZE);
+
+        // 💡 لضمان أنها لا تنكمش أقل من هذا الحجم إذا كانت المساحة ضيقة
+        readingPanel.setMinimumSize(READING_WIDGET_SIZE);
+
+        readingPanel.setDonutOffset(10, 0);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0; // 💡 تتمدد وتأخذ المساحة الإضافية
+        gbc.insets = new Insets(READING_WIDGET_TOP_SHIFT, 0, 0, HORIZONTAL_WIDGET_GAP);
+        contentWrapper.add(readingPanel, gbc);
+
+        // 2. PopularAuthorWidget (الودجت اليمنى)
+        PopularAuthorWidget authorWidget = new PopularAuthorWidget();
+
+        // 💡 نستخدم setPreferredSize للتحكم في عرضها المحدد (400x300)
+        authorWidget.setPreferredSize(AUTHOR_WIDGET_SIZE);
+        authorWidget.setMinimumSize(AUTHOR_WIDGET_SIZE);
+
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 0.0; // 💡 لا تتمدد، تحافظ على حجمها المفضل/الأدنى
+        gbc.insets = new Insets(0, 0, 0, 0);
+        contentWrapper.add(authorWidget, gbc);
+
+        bottomPanel.add(contentWrapper, BorderLayout.CENTER);
+
+        return bottomPanel;
+    }
+
     private void initComponents() {
-
-        lb = new javax.swing.JLabel();
-
-        lb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb.setText("Dashboard");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lb, javax.swing.GroupLayout.DEFAULT_SIZE, 1062, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lb)
-                .addContainerGap(592, Short.MAX_VALUE))
-        );
-    }// </editor-fold>//GEN-END:initComponents
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lb;
-    // End of variables declaration//GEN-END:variables
+        lb = new JLabel("Dashboard", SwingConstants.CENTER);
+        // 🐞 تم إصلاح الخطأ: تغيير 'color' إلى 'foreground'
+        lb.putClientProperty(FlatClientProperties.STYLE, "font:$h1.font; foreground:$textColor;");
+    }
 }
