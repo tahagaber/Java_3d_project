@@ -26,7 +26,7 @@ public class Menu extends JPanel {
 
 private final String menuItems[][] = {
     {"~MAIN~"},
-    {"Dashboard", "Notifications"},
+    {"Dashboard"},
 
     {"~HOME~"},
     {"Home", "Lecture", "Assignment", "Exams", "Grades", "Attendance", "Account"},

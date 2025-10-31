@@ -111,7 +111,7 @@ public class ReadingDemographicPanel extends JPanel {
             SECONDARY_BG = new Color(237, 207, 207, 150);
             FONT_COLOR = Color.WHITE;
 
-            colors[0] = new Color(33, 150, 243);
+            colors[0] = new Color(51, 42, 159);
             colors[1] = new Color(244, 67, 54);
             colors[2] = new Color(255, 235, 59);
             colors[3] = new Color(76, 175, 80);
