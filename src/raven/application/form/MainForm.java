@@ -16,6 +16,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import raven.application.Application;
+import raven.application.form.other.FormBorrowedBooks;
 import raven.application.form.other.FormDashboard;
 import raven.application.form.other.FormInbox;
 import raven.application.form.other.FormRead;
@@ -77,8 +78,8 @@ public class MainForm extends JLayeredPane {
                     Application.showForm(new FormInbox());
                 } else if (subIndex == 2) {
                     Application.showForm(new FormRead());
-                } else {
-                    action.cancel();
+                } else if (subIndex == 3){
+                    Application.showForm(new FormBorrowedBooks());
                 }
             } else if (index == 9) {
                 Application.logout();

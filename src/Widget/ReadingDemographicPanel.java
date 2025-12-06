@@ -476,7 +476,7 @@ public class ReadingDemographicPanel extends JPanel {
             // 4. رسم النص في الوسط
             g2.setColor(FONT_COLOR);
             g2.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
-            String text = "Books"; // 💡 تغيير النص ليعكس المكتمل
+            String text = "    Books"; // 💡 تغيير النص ليعكس المكتمل
             FontMetrics fm = g2.getFontMetrics();
             int textX = innerX + (innerRadius - fm.stringWidth(text)) / 2;
             int textY = innerY + innerRadius / 2 - 10;

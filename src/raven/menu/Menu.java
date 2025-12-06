@@ -24,31 +24,27 @@ import raven.menu.mode.ToolBarAccentColor;
  */
 public class Menu extends JPanel {
 
-private final String menuItems[][] = {
-    {"~MAIN~"},
-    {"Dashboard"},
+    private final String menuItems[][] = {
+            {"~MAIN~"},
+            {"Dashboard"},
 
-    {"~HOME~"},
-    {"Home", "Lecture", "Assignment", "Exams", "Grades", "Attendance", "Account"},
+            {"~HOME~"},
+            {"Home", "Browse Books", "Search Catalog", "My Loans", "My Reservations", "My Account"},
 
-    {"~COMMUNICATION~"},
-    {"Chat", "Calendar", "Announcements", "Forum"},
+            {"~RESOURCES~"},
+            {"New Arrivals", "Digital Resources"},
 
-    {"~COURSE MANAGEMENT~"},
-    {"Courses", "My Courses", "Add Course", "Course Materials"},
+            {"~COMMUNICATION~"},
+            {"Announcements", "Events Calendar", "Help Desk", "User Forum"},
 
-    {"~ADMIN~"},
-    {"Manage Students", "Manage Faculty", "Manage Courses", "Reports"},
+            {"~LIBRARY MANAGEMENT~"},
+            {"Manage Patrons", "Manage Books", "Manage Staff", "Reports & Statistics"},
 
-    {"Forms", "Basic Elements", "Advanced Elements", "Editors", "Wizard"},
+            {"~SETTINGS & HELP~"},
+            {"Settings", "Help Center"},
 
-    {"~OTHER~"},
-    {"Charts", "Apex", "Flot", "Peity", "Sparkline"},
-    {"Icons", "Feather Icons", "Flag Icons", "Mdi Icons"},
-    {"Settings", "Help Center"},
-    {"Logout", "fa fa-sign-out-alt"}
-};
-
+            {"Logout"}
+    };
 
     public boolean isMenuFull() {
         return menuFull;
@@ -74,7 +70,7 @@ private final String menuItems[][] = {
 
     private final List<MenuEvent> events = new ArrayList<>();
     private boolean menuFull = true;
-    private final String headerName = "BATU";
+    private final String headerName = "Books";
 
     protected final boolean hideMenuTitleOnMinimum = true;
     protected final int menuTitleLeftInset = 5;
@@ -94,7 +90,7 @@ private final String menuItems[][] = {
                 + "background:$Menu.background;"
                 + "arc:10");
         header = new JLabel(headerName);
-        header.setIcon(new ImageIcon(getClass().getResource("/raven/icon/png/university (2).png")));
+        header.setIcon(new ImageIcon(getClass().getResource("/raven/icon/png/book-bookmark-svgrepo-com (1) (1).png")));
         header.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$Menu.header.font;"
                 + "foreground:$Menu.foreground");
