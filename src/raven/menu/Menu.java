@@ -40,8 +40,8 @@ public class Menu extends JPanel {
             {"~LIBRARY MANAGEMENT~"},
             {"Manage Books", "Manage Patrons", "Reports"},
 
-            {"~SETTINGS~"},
-            {"Settings", "Help Center"},
+            {"~TEAM~"},
+            {"Team", "Members"},
 
             {"Logout"}
     };

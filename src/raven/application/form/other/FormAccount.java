@@ -81,7 +81,7 @@ public class FormAccount extends JPanel {
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setOpaque(false);
 
-        JLabel lblName = new JLabel("Ahmed Mohamed");
+        JLabel lblName = new JLabel("Taha Gaber");
         lblName.setFont(new Font("Segoe UI", Font.BOLD, 24));
 
         JLabel lblRole = new JLabel("Library Administrator");
@@ -89,7 +89,7 @@ public class FormAccount extends JPanel {
         lblRole.putClientProperty(FlatClientProperties.STYLE,
                 "foreground:$Label.disabledForeground");
 
-        JLabel lblMember = new JLabel("Member since January 2024");
+        JLabel lblMember = new JLabel("Member since January 2025");
         lblMember.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         lblMember.putClientProperty(FlatClientProperties.STYLE,
                 "foreground:$Label.disabledForeground");
@@ -133,21 +133,21 @@ public class FormAccount extends JPanel {
         // Full Name
         formPanel.add(createFieldLabel("Full Name"));
         formPanel.add(Box.createVerticalStrut(6));
-        txtName = createStyledTextField("Ahmed Mohamed");
+        txtName = createStyledTextField("Taha Gaber");
         formPanel.add(txtName);
         formPanel.add(Box.createVerticalStrut(16));
 
         // Email
         formPanel.add(createFieldLabel("Email Address"));
         formPanel.add(Box.createVerticalStrut(6));
-        txtEmail = createStyledTextField("ahmed.mohamed@library.com");
+        txtEmail = createStyledTextField("tahagaber175@Books.com");
         formPanel.add(txtEmail);
         formPanel.add(Box.createVerticalStrut(16));
 
         // Phone
         formPanel.add(createFieldLabel("Phone Number"));
         formPanel.add(Box.createVerticalStrut(6));
-        txtPhone = createStyledTextField("+20 123 456 7890");
+        txtPhone = createStyledTextField("+20 276 800 187");
         formPanel.add(txtPhone);
 
         card.add(formPanel, BorderLayout.CENTER);
@@ -178,7 +178,7 @@ public class FormAccount extends JPanel {
         // Username
         formPanel.add(createFieldLabel("Username"));
         formPanel.add(Box.createVerticalStrut(6));
-        txtUsername = createStyledTextField("ahmed.mohamed");
+        txtUsername = createStyledTextField("taha.gaber");
         txtUsername.setEnabled(false);
         formPanel.add(txtUsername);
         formPanel.add(Box.createVerticalStrut(16));

@@ -29,8 +29,8 @@ public class FormInbox extends javax.swing.JPanel {
 
     private void initSampleBooks() {
         allBooks = new ArrayList<>();
-        allBooks.add(new Book("The Great Gatsby", "F. Scott Fitzgerald", "Classic", "$12.99", "⭐ 4.5", true, 32, "raven/icon/png/Taha (3).jpg"));
-        allBooks.add(new Book("1984", "George Orwell", "Fiction", "$14.99", "⭐ 4.7", true, 15, "path/to/1984.jpg"));
+        allBooks.add(new Book("The Great Gatsby", "F. Scott Fitzgerald", "Classic", "$12.99", "⭐ 4.5", true, 32, "src/raven/icon/png/Books-01.jpg"));
+        allBooks.add(new Book("1984", "George Orwell", "Fiction", "$14.99", "⭐ 4.7", true, 15, "src/raven/icon/png/Books-01.jpg"));
         allBooks.add(new Book("To Kill a Mockingbird", "Harper Lee", "Classic", "$11.99", "⭐ 4.8", false, 0, "path/to/mockingbird.jpg"));
         allBooks.add(new Book("Pride and Prejudice", "Jane Austen", "Romance", "$10.99", "⭐ 4.6", true, 28, "path/to/pride.jpg"));
         allBooks.add(new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy", "$15.99", "⭐ 4.9", true, 45, "path/to/hobbit.jpg"));

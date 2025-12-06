@@ -102,6 +102,14 @@ public class MainForm extends JLayeredPane {
             } else if (index == 4) {
                 if(subIndex == 1){
                     Application.showForm( new FormManagePatrons());
+                }else if (subIndex == 2){
+                    Application.showForm(new FormReports());
+                }
+            }
+            // TEAM
+            else if (index == 5){
+                if (subIndex == 1){
+                    Application.showForm(new FormMembers());
                 }
             }
             else if (index == 6) {
