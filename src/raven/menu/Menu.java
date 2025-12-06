@@ -29,18 +29,18 @@ public class Menu extends JPanel {
             {"Dashboard"},
 
             {"~HOME~"},
-            {"Home", "Browse Books", "Search Catalog", "My Loans", "My Reservations", "My Account"},
+            {"Home", "Browse Books", "Review", "My Account"},
 
             {"~RESOURCES~"},
-            {"New Arrivals", "Digital Resources"},
+            {"New Arrivals", "Digital Resources", "Research Guides"},
 
             {"~COMMUNICATION~"},
-            {"Announcements", "Events Calendar", "Help Desk", "User Forum"},
+            {"Announcements", "Events Calendar"},
 
             {"~LIBRARY MANAGEMENT~"},
-            {"Manage Patrons", "Manage Books", "Manage Staff", "Reports & Statistics"},
+            {"Manage Books", "Manage Patrons", "Reports"},
 
-            {"~SETTINGS & HELP~"},
+            {"~SETTINGS~"},
             {"Settings", "Help Center"},
 
             {"Logout"}

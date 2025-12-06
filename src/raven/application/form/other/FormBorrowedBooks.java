@@ -520,4 +520,7 @@ public class FormBorrowedBooks extends javax.swing.JPanel {
             this.daysRemaining = daysRemaining;
         }
     }
+
+    public static class FormAccount {
+    }
 }

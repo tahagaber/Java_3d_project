@@ -16,10 +16,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import raven.application.Application;
-import raven.application.form.other.FormBorrowedBooks;
-import raven.application.form.other.FormDashboard;
-import raven.application.form.other.FormInbox;
-import raven.application.form.other.FormRead;
+import raven.application.form.other.*;
 import raven.menu.Menu;
 import raven.menu.MenuAction;
 
@@ -73,15 +70,41 @@ public class MainForm extends JLayeredPane {
             // Application.mainForm.showForm(new DefaultForm("Form : " + index + " " + subIndex));
             if (index == 0) {
                 Application.showForm(new FormDashboard());
-            } else if (index == 1) {
+            }
+            // HOME
+            else if (index == 1) {
                 if (subIndex == 1) {
                     Application.showForm(new FormInbox());
                 } else if (subIndex == 2) {
                     Application.showForm(new FormRead());
-                } else if (subIndex == 3){
-                    Application.showForm(new FormBorrowedBooks());
+                } else if (subIndex == 3) {
+                    Application.showForm(new FormAccount());
                 }
-            } else if (index == 9) {
+                else {
+                    action.cancel();
+                }
+            }
+            //RESOURCES
+            else if (index == 2){
+                if (subIndex == 1){
+                    Application.showForm(new FormDigitalResources());
+                }else if(subIndex == 2){
+                    Application.showForm(new FormResearchGuides());
+                }
+
+            }
+            //COMMUNICATION
+            else if (index == 3 ){
+                if(subIndex == 1){
+                    Application.showForm(new FormEventsCalendar());
+                }
+            //LIBRARY MANAGEMENT
+            } else if (index == 4) {
+                if(subIndex == 1){
+                    Application.showForm( new FormManagePatrons());
+                }
+            }
+            else if (index == 6) {
                 Application.logout();
             } else {
                 action.cancel();
